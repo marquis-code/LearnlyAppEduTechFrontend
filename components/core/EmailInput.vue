@@ -21,7 +21,6 @@
   </template>
   
   <script lang="ts" setup>
-  import { ref } from 'vue';
   import { useEmailValidation } from '@/composables/core/useEmailValidation';
   const emit = defineEmits(['completed'])
   const {
@@ -39,8 +38,3 @@
 
   };
   </script>
-  
-  <style scoped>
-  /* Add any additional styles here if needed */
-  </style>
-  

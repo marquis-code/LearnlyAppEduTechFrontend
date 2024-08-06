@@ -1,26 +1,7 @@
 <template>
   <main>
     <div v-if="defaultView === 'list'" class="space-y-6">
-      <div class="sm:flex sm:items-center">
-        <div class="sm:flex-auto pt-10">
-          <h1 class="text-xl font-semibold leading-6 text-gray-900">
-            Products
-          </h1>
-          <p class="mt-2 text-sm text-gray-700">
-            A list of all your products including name, description, image and
-            price.
-          </p>
-        </div>
-        <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-          <button
-            type="button"
-            @click="showSlideOver = true"
-            class="block rounded-md bg-black text-white px-3 py-2 text-center text-sm font-semibold"
-          >
-            Add products
-          </button>
-        </div>
-      </div>
+     <ProductHeader @addProduct="showSlideOver = true" />
 
       <div class="border border-gray-100 bg-white rounded-lg shadow">
         <div class="flex w-full md:ml-0">
@@ -55,101 +36,7 @@
         </div>
         <div v-if="!loading && filteredProducts.length" class="flow-root">
           <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 p-3">
-            <div
-              class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8"
-            >
-              <table class="min-w-full divide-y divide-gray-300">
-                <thead>
-                  <tr>
-                    <th
-                      scope="col"
-                      class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
-                    >
-                      Name
-                    </th>
-                    <th
-                      scope="col"
-                      class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Description
-                    </th>
-                    <th
-                      scope="col"
-                      class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Price
-                    </th>
-                    <th
-                      scope="col"
-                      class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Created At
-                    </th>
-                    <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
-                      Actions
-                    </th>
-                  </tr>
-                </thead>
-                <tbody class="divide-y divide-gray-200 bg-white">
-                  <tr v-for="product in filteredProducts" :key="product.id">
-                    <td
-                      class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0"
-                    >
-                      <div class="flex items-center">
-                        <div class="h-11 w-11 flex-shrink-0">
-                          <CoreImageZoom
-                            v-if="product.imageURL"
-                            class="h-10 w-10"
-                            :src="product.imageURL"
-                          />
-                        </div>
-                        <div class="ml-4">
-                          <div class="font-medium text-gray-900">
-                            {{ product.name || "Nil" }}
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td
-                      class="whitespace-nowrap px-3 py-5 text-sm text-gray-500"
-                    >
-                      {{ product.description.slice(0, 30) + "..." || "Nil" }}
-                    </td>
-                    <td
-                      class="whitespace-nowrap px-3 py-5 text-sm text-gray-500"
-                    >
-                      {{ formatPrice(product.price) || "Nil" }}
-                    </td>
-                    <td
-                      class="whitespace-nowrap px-3 py-5 text-sm text-gray-500"
-                    >
-                      {{
-                        moment.utc(product.createdAt).format("MMMM Do YYYY") ||
-                        "Nil"
-                      }}
-                    </td>
-                    <td
-                      class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0"
-                    >
-                      <div class="flex items-center justify-center gap-x-4">
-                        <a
-                          @click.prevent="handleEditProduct(product)"
-                          href="#"
-                          class="text-indigo-600 hover:text-indigo-900"
-                          >Edit</a
-                        >
-                        <a
-                          @click.prevent="deleteProduct(product._id)"
-                          href="#"
-                          class="text-red-600 hover:text-red-900"
-                          >Delete</a
-                        >
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+            <ProductTable @edit="handleEditProduct" :filteredProducts="filteredProducts" />
           </div>
         </div>
         <div
@@ -351,13 +238,12 @@
 </template>
 
 <script setup lang="ts">
-import moment from "moment";
 import { useFetchProductsList } from "@/composables/products/fetch";
 import { useCreateProduct } from "@/composables/products/create";
 import { useUpdateProduct } from "@/composables/products/update";
-import { useDeleteProduct } from "@/composables/products/delete";
+// import { useDeleteProduct } from "@/composables/products/delete";
 
-const { filteredProducts, searchQuery, loading } = useFetchProductsList();
+const { filteredProducts, searchQuery, loading, fetchProducts } = useFetchProductsList();
 const {
   createProduct,
   resetForm,
@@ -365,11 +251,9 @@ const {
   loading: creatingProducts,
   errors,
   selectedProduct,
-  showDropdown,
-  foodCategories,
 } = useCreateProduct();
 const { updateProduct, setEditProduct, loading: updating } = useUpdateProduct();
-const { deleteProduct, loading: deleting } = useDeleteProduct();
+// const { deleteProduct, loading: deleting } = useDeleteProduct();
 
 const defaultView = ref("list");
 const showSlideOver = ref(false);
@@ -384,12 +268,12 @@ const submitForm = async () => {
     setEditProduct(form.value);
     await updateProduct().then(() => {
       showSlideOver.value = false;
-      fetchProducts(); // Refresh the products list
+      fetchProducts();
     });
   } else {
     await createProduct().then(() => {
       showSlideOver.value = false;
-      fetchProducts(); // Refresh the products list
+      fetchProducts();
     });
   }
 };
@@ -416,16 +300,4 @@ const handleEditProduct = (product: any) => {
   selectedProduct.value = { ...product };
   form.value = { ...product };
 };
-
-const formatPrice = (price: any) => {
-  if (price == null) return "Nil";
-  return new Intl.NumberFormat("en-NG", {
-    style: "currency",
-    currency: "NGN",
-  }).format(price);
-};
 </script>
-
-<style scoped>
-/* Add any additional styles here if needed */
-</style>
