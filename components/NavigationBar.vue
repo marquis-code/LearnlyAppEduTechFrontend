@@ -53,7 +53,7 @@
                         </div>
                         <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4">
                             <div class="flex h-16 shrink-0 items-center">
-                                <NuxtLink to="/"><img class="h-5 w-auto" src="@/assets/icons/logo.svg" alt="Your Company"></NuxtLink>
+                                <NuxtLink to="/"><img class="h-5 w-auto" src="@/assets/icons/ecommerce-logo.svg" alt="Your Company"></NuxtLink>
                             </div>
                             <nav class="flex flex-1 flex-col">
                                 <ul role="list" class="flex flex-1 flex-col gap-y-7">

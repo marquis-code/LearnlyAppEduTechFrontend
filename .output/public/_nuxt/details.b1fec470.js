@@ -1,1 +1,0 @@
-import{_ as e,o as t,c as o,a as c}from"./entry.57491fe1.js";const s={},n=c("h1",null,"Store products here",-1),r=[n];function a(_,l){return t(),o("main",null,r)}const i=e(s,[["render",a]]);export{i as default};

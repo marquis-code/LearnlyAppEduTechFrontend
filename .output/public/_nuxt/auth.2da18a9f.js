@@ -1,1 +1,0 @@
-import{a as r}from"./axios.config.dbe20dcc.js";const o={register(t){return r.post("/auth/signup",t)},login(t){return r.post("/auth/login",t)},verify(t){return r.post("/auth/verify",t)}};export{o as a};
