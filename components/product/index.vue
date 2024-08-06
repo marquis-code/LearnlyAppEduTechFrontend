@@ -4,36 +4,7 @@
      <ProductHeader @addProduct="showSlideOver = true" />
 
       <div class="border border-gray-100 bg-white rounded-lg shadow">
-        <div class="flex w-full md:ml-0">
-          <label for="search-field" class="sr-only">Search</label>
-          <div class="relative w-full text-gray-400 focus-within:text-gray-600 border-b">
-            <div
-              class="pointer-events-none absolute inset-y-0 left-2 flex items-center"
-              aria-hidden="true"
-            >
-              <svg
-                class="h-5 w-5"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-            </div>
-            <input
-              placeholder="Search products..."
-              id="search-field"
-              name="search-field"
-              v-model="searchQuery"
-              class="block h-full w-full border-transparent py-6 pl-8 pr-3 text-gray-900 focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-              type="search"
-            />
-          </div>
-        </div>
+        <ProductSearchInput v-model="searchQuery" />
         <div v-if="!loading && filteredProducts.length" class="flow-root">
           <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 p-3">
             <ProductTable @edit="handleEditProduct" :filteredProducts="filteredProducts" />
@@ -43,29 +14,7 @@
           v-else-if="loading"
           class="h-32 bg-slate-300 rounded w-full mt-6 animate-pulse"
         ></div>
-        <div class="text-center border rounded-xl py-6 mt-6" v-else>
-          <svg
-            class="mx-auto h-12 w-12 text-gray-400"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              vector-effect="non-scaling-stroke"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"
-            />
-          </svg>
-          <h3 class="mt-2 text-sm font-semibold text-gray-900">
-            No products available
-          </h3>
-          <p class="mt-1 text-sm text-gray-500">
-            Get started by creating an account to create a new product.
-          </p>
-        </div>
+        <ProductEmptyState v-else />
       </div>
     </div>
     <CoreSlideOver
@@ -241,7 +190,6 @@
 import { useFetchProductsList } from "@/composables/products/fetch";
 import { useCreateProduct } from "@/composables/products/create";
 import { useUpdateProduct } from "@/composables/products/update";
-// import { useDeleteProduct } from "@/composables/products/delete";
 
 const { filteredProducts, searchQuery, loading, fetchProducts } = useFetchProductsList();
 const {
@@ -253,7 +201,6 @@ const {
   selectedProduct,
 } = useCreateProduct();
 const { updateProduct, setEditProduct, loading: updating } = useUpdateProduct();
-// const { deleteProduct, loading: deleting } = useDeleteProduct();
 
 const defaultView = ref("list");
 const showSlideOver = ref(false);
