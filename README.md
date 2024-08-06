@@ -1,7 +1,7 @@
 Frontend Documentation
 
-The Backend of the application was hosted on render.com 
-Here is the url of the backend application (https://learnly-app-edu-tech-frontend.vercel.app/)
+The Frontend of the application was hosted on vercel.com 
+Here is the url of the frontend application (https://learnly-app-edu-tech-frontend.vercel.app/)
 
 Overview
 The frontend of the application is built using Nuxt 3 with the Composition API and TypeScript. It provides a user-friendly interface for managing products and user authentication.
