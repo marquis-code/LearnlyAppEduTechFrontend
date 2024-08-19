@@ -19,7 +19,7 @@
             </div>
 
             <div class="flex flex-shrink-0 items-center px-4">
-              <img class="h-20 w-auto" src="@/assets/icons/ecommerce-logo.svg" alt="Easywire logo">
+              <img class="h-20 w-auto" src="@/assets/img/logo.png" alt="Easywire logo">
             </div>
             <nav class="mt-5 h-full flex-shrink-0 divide-y divide-cyan-800 overflow-y-auto" aria-label="Sidebar">
               <div class="space-y-2.5 px-2">

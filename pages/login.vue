@@ -1,12 +1,8 @@
 <template>
 <div class="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
-  <div class="sm:mx-auto sm:w-full sm:max-w-md">
-    <img class="mx-auto h-10 w-auto" src="@/assets/icons/ecommerce-logo.svg" alt="Your Company">
-    <h2 class="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your account</h2>
-  </div>
-
-  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
-    <div class="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
+  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-[580px]">
+    <img class="h-10 w-auto pl-9" src="@/assets/img/logo.png" alt="Your Company">
+    <div class="bg-white px-6 py-12 sm:px-12">
       <form @submit.prevent="handleLogin" class="space-y-6" action="#" method="POST">
         <div>
           <label for="email" class="block text-sm font-medium leading-6 text-[#0D0C22]">Email</label>
@@ -25,16 +21,15 @@
 
         <div>
           <button :disabled="!isFormEmpty || loading" type="submit" class="flex disabled:cursor-not-allowed disabled:opacity-25 w-full justify-center rounded-md bg-indigo-600 px-3 py-2.5 text-sm font-semibold leading-6 text-white shadow-sm">
-            {{ loading ? 'processing...' : 'Sign in' }}
+            {{ loading ? 'processing...' : 'Login' }}
           </button>
         </div>
       </form>
+      <p class="mt-10 text-center text-sm text-gray-500 flex justify-between items-center">
+        <NuxtLink to="/s" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Forgot password?</NuxtLink>
+        <NuxtLink to="/signup" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Sign Up</NuxtLink>
+      </p>
     </div>
-
-    <p class="mt-10 text-center text-sm text-gray-500">
-      Don't have an account?
-      <NuxtLink to="/signup" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Sign up</NuxtLink>
-    </p>
   </div>
 </div>
 
@@ -58,4 +53,8 @@ const togglePasswordVisibility = () => {
 const handleEmail = (email: string) => {
   loginPayload.value.email = email
 }
+
+definePageMeta({
+    layout: 'auth'
+})
 </script>
