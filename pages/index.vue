@@ -1,10 +1,22 @@
 <template>
   <main>
     <HeroSection />
+<!-- <div class="flex justify-center items-center border-b sticky top-16 z-50 bg-white shadow-sm">
+  <div class="sm:block">
+    <div class="border-b border-gray-200">
+      <nav class="-mb-px flex space-x-8 max-w-lg" aria-label="Tabs">
+        <a @click.native="activeTab = 'section1'" :class="[activeTab === 'section1' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700']" href="#section1" class="whitespace-nowrap border-b-2 px-1 py-4 text-sm font-medium">Automated Investing to help you build wealth</a>
+        <a @click.native="activeTab = 'section2'" :class="[activeTab === 'section2' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700']" href="#section2" class="whitespace-nowrap border-b-2 px-1 py-4 text-sm font-medium">High APY to grow your savings</a>
+        <a @click.native="activeTab = 'section3'" :class="[activeTab === 'section3' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700']" href="#section3" class="whitespace-nowrap border-b-2 px-1 py-4 text-sm font-medium" aria-current="page">Tax-advantaged IRAs for retirement</a>
+      </nav>
+    </div>
+  </div>
+</div> -->
+
 <div class="flex justify-center items-center border-b sticky top-16 z-50 bg-white shadow-sm">
   <div class="sm:block">
     <div class="border-b border-gray-200">
-      <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+      <nav class="-mb-px flex space-x-8 max-w-lg overflow-x-auto whitespace-nowrap sm:overflow-visible sm:whitespace-normal" aria-label="Tabs">
         <a @click.native="activeTab = 'section1'" :class="[activeTab === 'section1' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700']" href="#section1" class="whitespace-nowrap border-b-2 px-1 py-4 text-sm font-medium">Automated Investing to help you build wealth</a>
         <a @click.native="activeTab = 'section2'" :class="[activeTab === 'section2' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700']" href="#section2" class="whitespace-nowrap border-b-2 px-1 py-4 text-sm font-medium">High APY to grow your savings</a>
         <a @click.native="activeTab = 'section3'" :class="[activeTab === 'section3' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700']" href="#section3" class="whitespace-nowrap border-b-2 px-1 py-4 text-sm font-medium" aria-current="page">Tax-advantaged IRAs for retirement</a>
@@ -12,6 +24,8 @@
     </div>
   </div>
 </div>
+
+
 
 
     <section

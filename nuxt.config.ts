@@ -3,7 +3,7 @@ export default {
   target: "static",
   app: {
     head: {
-      title: "LearnlyAppEduTech",
+      title: "Betterment",
     htmlAttrs: {
       lang: "en",
     },
